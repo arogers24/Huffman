@@ -78,10 +78,13 @@ public class HuffmanTester {
 	
 	System.out.println("Testing Metamorphoses encoding task...");
 	System.out.println("  generating code from " + METAMORPHOSES_PATH);
+	RunTimer rt = new RunTimer();
 	try {
 	    in = new FileInputStream(METAMORPHOSES_PATH);
 	    huff = new Huffman();
+	    rt.start();
 	    huff.generateCode(in);
+	    rt.stop();
 	} catch (FileNotFoundException e) {
 	    System.err.println("File " + METAMORPHOSES_PATH + " not found\n" +
 			       "no test performed!");
@@ -95,10 +98,11 @@ public class HuffmanTester {
 	    System.out.println("  ...test failed");
 	    System.exit(0);
 	}
+	System.out.printf("Elapsted running time: %f seconds\n", rt.getElapsedSecs());
+	rt.reset();
 
 	System.out.println("Testing Shakespeare encoding task...");
 	System.out.println("  generating code from " + SHAKESPEARE_PATH);
-	RunTimer rt = new RunTimer();
 	try {
 	    in = new FileInputStream(SHAKESPEARE_PATH);
 	    huff = new Huffman();
